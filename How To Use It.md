@@ -174,7 +174,7 @@ The prototype gives extra property to contract, such as "master", "user", "spons
     ```
         uint256 blance = this.$balance(block.number);
     ```
-6. Get the energy(VTHOR) of the contract:
+6. Get the energy(PWP) of the contract:
     ```
         uint256 energy = this.$energy(block.number);
     ```
@@ -216,3 +216,4 @@ The prototype gives extra property to contract, such as "master", "user", "spons
     ```
         address somebody = this.$currentSponsor();
     ```
+
