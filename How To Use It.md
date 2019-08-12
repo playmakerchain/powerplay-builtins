@@ -35,7 +35,7 @@ The contract extension gives extension information about blockchain including "b
     ```
         address signer = extension.blockSigner(blockNum);
     ```
-8. Get totalSupply of VET
+8. Get totalSupply of PMK
     ```
         uint256 total = extension.totalSupply();
     ```
