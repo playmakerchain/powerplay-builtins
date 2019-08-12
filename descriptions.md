@@ -9,11 +9,11 @@ Signer address is releated to sign a block, endorsor address is used for chargin
 
 - `energy.sol`
 
-    Energy represents the sub-token in VeChainThor which conforms VIP180(ERC20) standard.
-The name of token is "VeThor" and 1 THOR equals to 1e18 wei. The main function of VeThor is to pay for the transaction fee. 
-VeThor is generated from VET, so the initial supply of VeThor is zero in the genesis block.
-The growth rate of VeThor is 5000000000 wei per token(VET) per second, that is to say 1 VET will produce about 0.000432 THOR per day.
-The miner will charge 30 percent of transation fee and 70 percent will be burned. So the total supply of VeThor is dynamic.
+    Energy represents the sub-token in PowerPlay which conforms VIP180(ERC20) standard.
+The name of token is "PowerPlay" and 1 POWERPLAY equals to 1e18 wei. The main function of PowerPlay is to pay for the transaction fee. 
+PowerPlay is generated from PMK, so the initial supply of PowerPlay is zero in the genesis block.
+The growth rate of PowerPlay is 5000000000 wei per token(PMK) per second, that is to say 1 PMK will produce about 0.000543 POWERPLAY per day.
+The miner will charge 30 percent of transation fee and 70 percent will be burned. So the total supply of PowerPlay is dynamic.
 
 - `extension.sol`
 
@@ -24,15 +24,15 @@ The developer can also get the current transaction information, including txProv
 
 - `params.sol`
 
-    Params stores the governance params of VeChain thor.
+    Params stores the governance params of PowerPlay.
 The params can be set by the executor, a contract that is authorized to modify governance params by a voting Committee.
 Anyone can get the params just by calling "get" funtion.
 The governance params is written in genesis block at launch time.
-You can check these params at source file: https://github.com/vechain/thor/blob/master/thor/params.go.
+You can check these params at source file: https://github.com/playmakerchain/powerplay/blob/master/powerplay/params.go.
 
 - `prototype.sol`
 
-    Prototype is an account management model of VeChainThor.
+    Prototype is an account management model of PowerPlay.
 In the account management model every contract has a master account, which, by default, is the creator of a contract.
 The master account plays the role of a contract manager, which has some authorities including 
 "setMaster", "setCreditPlan", "addUser", "removeUser" and "selectSponsor".
@@ -59,8 +59,7 @@ Only the approver in the executive committee has the authority to propose and ap
 ## Library Builtin
 - `builtin.sol`
 
-    The VeChainThor builtin contracts are encapsulated in library Builtin. It's very easy to use it for the developer, just import it.
-
+    The PowerPlay builtin contracts are encapsulated in library Builtin. It's very easy to use it for the developer, just import it.
 
 ## instance contracts
 - `CommodityInfo.sol`
@@ -71,6 +70,6 @@ Only master or users of the contract have authority to add commodity information
 
 - `Voting.sol`
 
-    Voting intends to modify governance params 'BaseGasPrice' in VechainThor by executor.
+    Voting intends to modify governance params 'BaseGasPrice' in PowerPlay by executor.
 First a voting will be proposed by an approver, and the approvers will vote it in a week.
 If two thirds of approvers approver the voting, the voting can be executed.
