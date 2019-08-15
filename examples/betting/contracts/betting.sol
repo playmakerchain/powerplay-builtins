@@ -2,24 +2,24 @@ pragma solidity ^0.4.23;
 
 import "../../../contracts/builtin.sol";
 
-/// @title CommodityInfo stores commodity information into a contract storage.
+/// @title Betting stores commodity information into a contract storage.
 /// Just for example, the information of commodity is very simple and it includes id, originPlace, productionDate and shelfLife.
 /// Only master or users of the contract have authority to add commodity information.
 
-contract CommodityInfo {
+contract Betting {
 
-    struct Item {
-        // commodity id
+    struct Game {
+        // game id
         bytes id;
 
-        // production origin place
-        string originPlace;
+        // starting bankroll
+        string startingBankroll;
 
-        // production date
-        uint productionDate;
+        // wagering size
+        uint wageringSize;
 
-        // shelf life
-        uint shelfLife;
+        // bankroll
+        uint bankroll;
     }
 
     mapping(bytes32=>Item) Commodity;
