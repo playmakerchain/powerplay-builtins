@@ -2,9 +2,9 @@ pragma solidity ^0.4.23;
 
 import "../../../contracts/builtin.sol";
 
-/// @title Betting stores commodity information into a contract storage.
-/// Just for example, the information of commodity is very simple and it includes id, originPlace, productionDate and shelfLife.
-/// Only master or users of the contract have authority to add commodity information.
+/// @title Betting stores game information into a contract storage.
+/// Just for example, the information of each game is very simple and it includes id, startingBankroll, wageringSize and bankroll.
+/// Only master or users of the contract have authority to add game information.
 
 contract Betting {
 
@@ -22,13 +22,13 @@ contract Betting {
         uint bankroll;
     }
 
-    mapping(bytes32=>Item) Commodity;
+    mapping(bytes32=>Item) Game;
 
-    using Builtin for CommodityInfo;
+    using Builtin for Betting;
 
     Extension extension = Builtin.getExtension();
 
-    event AddCommodity(bytes id, string originPlace, uint productionDate, uint shelfLife);
+    event AddGame(bytes id, string startingBankroll, uint wageringSize, uint bankroll);
 
     modifier onlyMasterOrUsers() {
         require(msg.sender == this.$master() || this.$isUser(msg.sender));
@@ -40,7 +40,7 @@ contract Betting {
         _;
     }
 
-    /// @notice The user have the authority to add or modify commodity info.
+    /// @notice The user have the authority to add or modify Game info.
     function addUser(address user) public onlyMaster {
         this.$addUser(user);
     }
@@ -61,31 +61,21 @@ contract Betting {
         return this.$creditPlan();
     }
 
-    /// @notice To check if account '_sponsor' is a sponsor.
-    function isSponsor(address _sponsor) public view returns(bool) {
-        return this.$isSponsor(_sponsor);
-    }
-
-    /// @notice The master or users will add an item of commodity info. 
-    function addCommodityItem(bytes id, string originPlace, uint productionDate, uint shelfLife) public onlyMasterOrUsers {
+    /// @notice The master or users will add an item of game info. 
+    function addGameItem(bytes id, string startingBankroll, uint wageringSize, uint bankroll) public onlyMasterOrUsers {
         bytes32 key = extension.blake2b256(id);
-        Commodity[key].id = id;
-        Commodity[key].originPlace = originPlace;
-        Commodity[key].productionDate = productionDate;
-        Commodity[key].shelfLife = shelfLife;
+        Game[key].id = id;
+        Game[key].startingBankroll = startingBankroll;
+        Game[key].wageringSize = wageringSize;
+        Game[key].bankroll = bankroll;
 
-        emit AddCommodity(id, originPlace, productionDate, shelfLife);
+        emit AddGame(id, startingBankroll, wageringSize, bankroll);
     }
 
-    /// @notice To get commodity info from id.
-    function getCommodityItem(bytes id) public view returns(string, uint, uint) {
+    /// @notice To get game info from id.
+    function getGameItem(bytes id) public view returns(string, uint, uint) {
         bytes32 key = extension.blake2b256(id);
-        return(Commodity[key].originPlace, Commodity[key].productionDate, Commodity[key].shelfLife);
+        return(Game[key].startingBankroll, Game[key].wageringSize, Game[key].bankroll);
     }
 
-    /// @notice To check if the commodity is expired.
-    function isCommodityExpired(bytes id) public view returns(bool) {
-        bytes32 key = extension.blake2b256(id);
-        return Commodity[key].productionDate + Commodity[key].shelfLife >= now;
-    }
 }
